@@ -1091,39 +1091,84 @@ import pandas as pd
 #   Se pide incluir aquí las definiciones y órdenes necesarias para definir
 #   las siguientes variables, con los datasets anteriores como arrays de numpy.
 
+# CRÉDITO
+# X_credito e y_credito ya están cargados desde carga_datos.py:
+#   X_credito = np.array([d[:-1] for d in credito.datos_con_clas])
+#   y_credito = np.array([d[-1]  for d in credito.datos_con_clas])
+enc = OrdinalEncoder()
+X_credito_codificado = enc.fit_transform(X_credito)
 
 # * X_train_credito, y_train_credito, X_test_credito, y_test_credito
-#   conteniendo el dataset de crédito con los atributos numñericos:
+#   conteniendo el dataset de crédito con los atributos numericos:
+X_train_temp_credito, X_test_credito, y_train_temp_credito, y_test_credito = particion_entr_prueba(X_credito_enc, y_credito, test=0.20)
 
+#Vamos a extraer un 10% para validación (70% train, 20% test, 10% validacion)
+#Valor de test = 0.1/0.8 = 0.125
+X_train_credito, X_valid_credito, y_train_credito, y_valid_credito = particion_entr_prueba(
+    X_train_temp_credito, y_train_temp_credito, test=0.125)
 
+# ADULT
+df_adult = pd.read_csv('datos/adultDataset.csv')
+#Separamos clase y atributos
+X_adult_base = df_adult.iloc[:, :-1].values
+y_adult = df_adult.iloc[:, -1].values
 
-
-
-
-
-
-
+#Codificamos columnas desde la 5 en adelante
+X_adult_categorias = enc.fit_transform(X_adult_base[:, 4:])
+X_adult = np.concatenate((X_adult_base[:, :4], X_adult_categorias), axis=1).astype(float)
 
 # * X_train_adult, y_train_adult, X_test_adult, y_test_adult
 #   conteniendo el AdultDataset con los atributos numéricos:
+X_train_adult, X_test_adult, y_train_adult, y_test_adult = particion_entr_prueba(
+    X_adult, y_adult, test=0.20)
 
 
+# DÍGITOS
+def carga_digitos(fichero_imagenes, fichero_etiquetas):
+    #Cada píxel ' ' (espacio) -> 0  (blanco)
+    #Cada píxel '+' o '#' -> 1  (negro)
+    
+    alto = 28
+    ancho = 28
+    
+    with open(fichero_imagenes, 'r') as fichero:
+        lineas = fichero.readlines()
+    
+    imagenes_finales = []
+     
+    for inicio_imagen in range(0, len(lineas), alto): #De 28 en 28 lineas
+        imagen_plana = [] # 28*28 = 784 píxeles
+        
+        for fila in range(alto): #28 filas de la imagen actual
+            linea_actual = lineas[inicio_imagen + fila]
+            
+            for caracter in linea_actual[:ancho]: #28 caracteres de la línea
+                if caracter == ' ':
+                    imagen_plana.append(0.0) # Espacio en blanco
+                else: 
+                    imagen_plana.append(1.0) # '+' o '#'
+                    
+        imagenes_finales.append(imagen_plana)
+        
+    X = np.array(imagenes_finales)
 
+    #Etiquetas
+    with open(fichero_etiquetas, 'r') as f:
+        etiquetas = []
+        for linea in f:
+            if linea.strip(): # si linea no está vacía
+                etiquetas.append(int(linea.strip()))
+    
+    y = np.array(etiquetas)
 
-
-
-
-
+    return X, y
+    
 
 # * X_train_dg, y_train_dg, X_valid_dg, y_valid_dg, X_test_dg, y_test_dg
 #   conteniendo el dataset de los dígitos escritos a mano:
-    
-
-
-
-
-
-
+X_train_dg, y_train_dg = carga_digitos("datos/digitdata/trainingimages","datos/digitdata/traininglabels")
+X_valid_dg, y_valid_dg = carga_digitos("datos/digitdata/validationimages","datos/digitdata/validationlabels")
+X_test_dg, y_test_dg = carga_digitos("datos/digitdata/testimages", "datos/digitdata/testlabels")
 
 
 # -----------------------------
