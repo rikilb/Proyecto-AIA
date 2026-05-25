@@ -997,26 +997,18 @@ class RandomForest:
 # ------
 
 # >>> clf_votos_rf=RandomForest(n_arboles=10,min_ejemplos_nodo_interior=3,max_prof=5,n_atrs=6,prop_umbral=0.8)
-clf_votos_rf=RandomForest(n_arboles=10,min_ejemplos_nodo_interior=3,max_prof=5,n_atrs=6,prop_umbral=0.8)
 # >>> clf_votos_rf.entrena(Xe_votos, ye_votos)
-clf_votos_rf.entrena(Xe_votos, ye_votos)
 # >>> rendimiento(clf_votos_rf,Xe_votos,ye_votos)
-print(rendimiento(clf_votos_rf,Xe_votos,ye_votos))
 # 0.9517241379310345
 # >>> rendimiento(clf_votos_rf,Xp_votos,yp_votos)
-print(rendimiento(clf_votos_rf,Xp_votos,yp_votos))
 # 0.9586206896551724
 
 
 # >>> clf_cancer_rf = RandomForest(n_arboles=15,min_ejemplos_nodo_interior=3,max_prof=10,n_atrs=15)
-clf_cancer_rf = RandomForest(n_arboles=15,min_ejemplos_nodo_interior=3,max_prof=10,n_atrs=15)
 # >>> clf_cancer_rf.entrena(Xev_cancer, yev_cancer)
-clf_cancer_rf.entrena(Xev_cancer, yev_cancer)
 # >>> rendimiento(clf_cancer_rf,Xev_cancer,yev_cancer)
-print(rendimiento(clf_cancer_rf,Xev_cancer,yev_cancer))
 # 1.0
 # >>> rendimiento(clf_cancer_rf,Xp_cancer,yp_cancer)
-print(rendimiento(clf_cancer_rf,Xp_cancer,yp_cancer))
 # 0.9911504424778761
 
 
@@ -1100,12 +1092,12 @@ X_credito_codificado = enc.fit_transform(X_credito)
 
 # * X_train_credito, y_train_credito, X_test_credito, y_test_credito
 #   conteniendo el dataset de crédito con los atributos numericos:
-X_train_temp_credito, X_test_credito, y_train_temp_credito, y_test_credito = particion_entr_prueba(X_credito_enc, y_credito, test=0.20)
+X_train_temp_credito, X_test_credito, y_train_temp_credito, y_test_credito = particion_entr_prueba(X_credito_codificado, y_credito, test=0.20)
 
-#Vamos a extraer un 10% para validación (70% train, 20% test, 10% validacion)
-#Valor de test = 0.1/0.8 = 0.125
+#Vamos a extraer un 20% para validación ya que es un dataset pequeño (60% train, 20% test, 20% validacion)
+#Valor de test = 0.2/0.8 = 0.25
 X_train_credito, X_valid_credito, y_train_credito, y_valid_credito = particion_entr_prueba(
-    X_train_temp_credito, y_train_temp_credito, test=0.125)
+    X_train_temp_credito, y_train_temp_credito, test=0.25)
 
 # ADULT
 df_adult = pd.read_csv('datos/adultDataset.csv')
@@ -1120,14 +1112,23 @@ X_adult = np.concatenate((X_adult_base[:, :4], X_adult_categorias), axis=1).asty
 # * X_train_adult, y_train_adult, X_test_adult, y_test_adult
 #   conteniendo el AdultDataset con los atributos numéricos:
 X_train_adult, X_test_adult, y_train_adult, y_test_adult = particion_entr_prueba(
-    X_adult, y_adult, test=0.20)
+    X_adult, y_adult, test=0.15)
 
+#Vamos a extraer un 15% para validación ya que es un dataset pequeño (70% train, 15% test, 15% validacion)
+#Valor de test = 0.15/0.85 = 0.18
+X_train_adult, X_valid_adult, y_train_adult, y_valid_adult = particion_entr_prueba(
+    X_train_adult, y_train_adult, test=0.18)
 
 # DÍGITOS
 def carga_digitos(fichero_imagenes, fichero_etiquetas):
-    #Cada píxel ' ' (espacio) -> 0  (blanco)
-    #Cada píxel '+' o '#' -> 1  (negro)
+    """
+    Lee fichero de imagenes de digitos (formato 28x28) y el fichero de etiquetas asociado
+    Cada píxel ' ' (espacio) -> 0  (blanco)
+    Cada píxel '+' o '#' -> 1  (negro)
     
+    Devuelve X array numpy de forma (número de imagenes, 28*28) - imagenes aplanadas
+    y array numpy de forma (numero de imagenes, 1) - etiqueta entera
+    """
     alto = 28
     ancho = 28
     
@@ -1170,7 +1171,6 @@ X_train_dg, y_train_dg = carga_digitos("datos/digitdata/trainingimages","datos/d
 X_valid_dg, y_valid_dg = carga_digitos("datos/digitdata/validationimages","datos/digitdata/validationlabels")
 X_test_dg, y_test_dg = carga_digitos("datos/digitdata/testimages", "datos/digitdata/testlabels")
 
-
 # -----------------------------
 # 4.2 AJUSTE DE HIPERPARÁMETROS     
 # -----------------------------
@@ -1199,17 +1199,113 @@ X_test_dg, y_test_dg = carga_digitos("datos/digitdata/testimages", "datos/digitd
 # DEJAR ESTE APARTADO COMENTADO, para que no se ejecuten las pruebas realizadas cuando se cargue
 # el archivo. 
 
+# Primero vamos a crear una funcion simple que dados datos de entrenamiento y validacion y una rejilla que contenga
+# combinaciones de hiperparametros seleccionadas manualmente para el Random Forest.
+def busqueda_hiperparametros(X_train, y_train, X_val, y_val, rejilla, nombre_dataset ="", fichero_log = "resultados_hiperparametros_log"):
+    """
+    Prueba cada combinación de hiperparametros de la rejilla,
+    entrena con (X_train, y_train) y evalua con (X_val, y_val).
+    Escribe los resultados en fichero_log.
+    Devuelve la mejor combinación encontrada y su rendimiento.
+    """
+    mejor_rend  = -1
+    mejores_params = None
+    resultados = []
+
+    for params in rejilla:
+        clasificador = RandomForest(**params)
+        clasificador.entrena(X_train, y_train)
+        rend_val = rendimiento(clasificador, X_val, y_val)
+        rend_train = rendimiento(clasificador, X_train, y_train) #Para ver si hay overfitting
+        resultados.append((params, rend_train, rend_val))
+        print(f"Params: {params} , rendimiento: {rend_val}")
+        if rend_val > mejor_rend:
+            mejor_rend = rend_val
+            mejores_params = params
+
+    with open(fichero_log, "a", encoding="utf-8") as f:
+        separador = "=" * 70
+
+        f.write(f"{separador}\n")
+        if nombre_dataset:
+            f.write(f"DATASET: {nombre_dataset}\n")
+        f.write(f"{separador}\n\n")
+
+        f.write("COMBINACIONES PROBADAS:\n")
+        f.write("-" * 70 + "\n")
+        for params, resultado_train, resultado_valid in resultados:
+            f.write(f"  Params : {params}\n")
+            f.write(f"  Train  : {resultado_train:.4f}   Val: {resultado_valid:.4f}\n")
+            f.write("-" * 70 + "\n")
+
+        f.write(f"\nMEJOR COMBINACIÓN:\n")
+        f.write(f"  Params     : {mejores_params}\n")
+        f.write(f"  Rendimiento validación: {mejor_rend:.4f}\n")
+        f.write(f"\n{separador}\n\n")
+
+    print(f"\n Mejores params: {mejores_params} , (val={mejor_rend:.4f})")
+    return mejores_params, mejor_rend
+
+# CRÉDITO
+# Definimos la rejilla de hiperparametros que probar, aqui se van añadiendo nuevas combinaciones
+rejilla_credito = [
+    {"n_arboles": 10, "max_prof": 5,  "min_ejemplos_nodo_interior": 3,  "n_atrs": 3, "prop_umbral": 1.0},
+    {"n_arboles": 10, "max_prof": 10, "min_ejemplos_nodo_interior": 3,  "n_atrs": 3, "prop_umbral": 1.0},
+    {"n_arboles": 15, "max_prof": 10, "min_ejemplos_nodo_interior": 5,  "n_atrs": 4, "prop_umbral": 0.8},
+    {"n_arboles": 20, "max_prof": 15, "min_ejemplos_nodo_interior": 3,  "n_atrs": 4, "prop_umbral": 0.8},
+    {"n_arboles": 20, "max_prof": 15, "min_ejemplos_nodo_interior": 3,  "n_atrs": 6, "prop_umbral": 0.7},
+]
+
+print("AJUSTE CREDITO")
+print("---------------------")
+mejores_params_credito, _ = busqueda_hiperparametros(
+    X_train_credito, y_train_credito, X_valid_credito, y_valid_credito, rejilla_credito, "CREDITO")
+
+#ADULTO
+rejilla_adult = [
+    {"n_arboles": 10, "max_prof": 5,  "min_ejemplos_nodo_interior": 5,  "n_atrs": 4,  "prop_umbral": 1.0},
+    {"n_arboles": 10, "max_prof": 10, "min_ejemplos_nodo_interior": 5,  "n_atrs": 6,  "prop_umbral": 1.0},
+    {"n_arboles": 15, "max_prof": 10, "min_ejemplos_nodo_interior": 3,  "n_atrs": 6,  "prop_umbral": 0.8},
+    {"n_arboles": 15, "max_prof": 15, "min_ejemplos_nodo_interior": 3,  "n_atrs": 8,  "prop_umbral": 0.8},
+    {"n_arboles": 20, "max_prof": 15, "min_ejemplos_nodo_interior": 3,  "n_atrs": 8,  "prop_umbral": 0.7},
+]
+
+print("AJUSTE ADULT")
+print("---------------------")
+mejores_params_adult, _ = busqueda_hiperparametros(
+    X_train_adult, y_train_adult, X_valid_adult, y_valid_adult, rejilla_adult, "ADULT")
+
+# DIGITOS
+rejilla_digitos = [
+    {"n_arboles": 10, "max_prof": 10, "min_ejemplos_nodo_interior": 3,  "n_atrs": 50,  "prop_umbral": 1.0},
+    {"n_arboles": 15, "max_prof": 15, "min_ejemplos_nodo_interior": 3,  "n_atrs": 100, "prop_umbral": 0.8},
+    {"n_arboles": 20, "max_prof": 20, "min_ejemplos_nodo_interior": 3,  "n_atrs": 150, "prop_umbral": 0.8},
+    {"n_arboles": 20, "max_prof": 20, "min_ejemplos_nodo_interior": 5,  "n_atrs": 200, "prop_umbral": 0.7},
+    {"n_arboles": 30, "max_prof": 25, "min_ejemplos_nodo_interior": 3,  "n_atrs": 200, "prop_umbral": 0.7},
+]
+
+print("AJUSTE DÍGITOS")
+print("---------------------")
+mejores_params_dg, _ = busqueda_hiperparametros(
+    X_train_dg, y_train_dg, X_valid_dg, y_valid_dg, rejilla_digitos, "DIGITOS")
+
+# IMDB
+# IMDB viene separado en train y test, vamos a extraer un conjunto de validación
+X_train_imdb, X_valid_imdb, y_train_imdb, y_valid_imdb = particion_entr_prueba(
+    X_train_imdb, y_train_imdb, test=0.20)
+
+rejilla_imdb = [
+    {"n_arboles": 10, "max_prof": 10, "min_ejemplos_nodo_interior": 3,  "n_atrs": 100, "prop_umbral": 1.0},
+    {"n_arboles": 15, "max_prof": 15, "min_ejemplos_nodo_interior": 3,  "n_atrs": 150, "prop_umbral": 0.8},
+    {"n_arboles": 20, "max_prof": 15, "min_ejemplos_nodo_interior": 3,  "n_atrs": 200, "prop_umbral": 0.8},
+    {"n_arboles": 20, "max_prof": 20, "min_ejemplos_nodo_interior": 5,  "n_atrs": 200, "prop_umbral": 0.7},
+    {"n_arboles": 30, "max_prof": 20, "min_ejemplos_nodo_interior": 3,  "n_atrs": 300, "prop_umbral": 0.7},
+]
+
+print("=== AJUSTE IMDB ===")
+mejores_params_imdb, _ = busqueda_hiperparametros(
+    X_train_imdb, y_train_imdb, X_valid_imdb, y_valid_imdb, rejilla_imdb, "IMDB")
 # ----------------------------
-
-
-
-
-
-
-
-
-
-
 
 
 # ********************************************************************************
