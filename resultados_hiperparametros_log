@@ -137,3 +137,456 @@ MEJOR COMBINACIÓN:
 
 ======================================================================
 
+======================================================================
+DATASET: CREDITO
+======================================================================
+
+COMBINACIONES PROBADAS:
+----------------------------------------------------------------------
+  Params : {'n_arboles': 10, 'max_prof': 5, 'min_ejemplos_nodo_interior': 3, 'n_atrs': 3, 'prop_umbral': 1.0}
+  Train  : 0.8026   Val: 0.6308
+----------------------------------------------------------------------
+  Params : {'n_arboles': 10, 'max_prof': 10, 'min_ejemplos_nodo_interior': 3, 'n_atrs': 3, 'prop_umbral': 1.0}
+  Train  : 0.7051   Val: 0.6077
+----------------------------------------------------------------------
+  Params : {'n_arboles': 15, 'max_prof': 10, 'min_ejemplos_nodo_interior': 5, 'n_atrs': 4, 'prop_umbral': 0.8}
+  Train  : 0.9487   Val: 0.7923
+----------------------------------------------------------------------
+  Params : {'n_arboles': 20, 'max_prof': 15, 'min_ejemplos_nodo_interior': 3, 'n_atrs': 4, 'prop_umbral': 0.8}
+  Train  : 0.9487   Val: 0.8077
+----------------------------------------------------------------------
+  Params : {'n_arboles': 20, 'max_prof': 15, 'min_ejemplos_nodo_interior': 3, 'n_atrs': 6, 'prop_umbral': 0.7}
+  Train  : 0.9718   Val: 0.8462
+----------------------------------------------------------------------
+  Params : {'n_arboles': 50, 'max_prof': 10, 'min_ejemplos_nodo_interior': 3, 'n_atrs': 6, 'prop_umbral': 1.0}
+  Train  : 0.9744   Val: 0.8615
+----------------------------------------------------------------------
+  Params : {'n_arboles': 40, 'max_prof': 12, 'min_ejemplos_nodo_interior': 2, 'n_atrs': 3, 'prop_umbral': 1.0}
+  Train  : 0.8128   Val: 0.6385
+----------------------------------------------------------------------
+  Params : {'n_arboles': 30, 'max_prof': 20, 'min_ejemplos_nodo_interior': 2, 'n_atrs': 3, 'prop_umbral': 1.0}
+  Train  : 0.8308   Val: 0.6385
+----------------------------------------------------------------------
+
+MEJOR COMBINACIÓN:
+  Params     : {'n_arboles': 50, 'max_prof': 10, 'min_ejemplos_nodo_interior': 3, 'n_atrs': 6, 'prop_umbral': 1.0}
+  Rendimiento validación: 0.8615
+
+======================================================================
+
+======================================================================
+DATASET: ADULT
+======================================================================
+
+COMBINACIONES PROBADAS:
+----------------------------------------------------------------------
+  Params : {'n_arboles': 10, 'max_prof': 5, 'min_ejemplos_nodo_interior': 5, 'n_atrs': 4, 'prop_umbral': 1.0}
+  Train  : 0.7826   Val: 0.7816
+----------------------------------------------------------------------
+  Params : {'n_arboles': 10, 'max_prof': 10, 'min_ejemplos_nodo_interior': 5, 'n_atrs': 6, 'prop_umbral': 1.0}
+  Train  : 0.8403   Val: 0.8318
+----------------------------------------------------------------------
+  Params : {'n_arboles': 15, 'max_prof': 10, 'min_ejemplos_nodo_interior': 3, 'n_atrs': 6, 'prop_umbral': 0.8}
+  Train  : 0.8628   Val: 0.8543
+----------------------------------------------------------------------
+  Params : {'n_arboles': 15, 'max_prof': 15, 'min_ejemplos_nodo_interior': 3, 'n_atrs': 8, 'prop_umbral': 0.8}
+  Train  : 0.8894   Val: 0.8607
+----------------------------------------------------------------------
+  Params : {'n_arboles': 20, 'max_prof': 15, 'min_ejemplos_nodo_interior': 3, 'n_atrs': 8, 'prop_umbral': 0.7}
+  Train  : 0.8907   Val: 0.8595
+----------------------------------------------------------------------
+  Params : {'n_arboles': 50, 'max_prof': 15, 'min_ejemplos_nodo_interior': 5, 'n_atrs': 3, 'prop_umbral': 0.7}
+  Train  : 0.7956   Val: 0.7921
+----------------------------------------------------------------------
+  Params : {'n_arboles': 40, 'prop_muestras': 0.7, 'max_prof': 20, 'min_ejemplos_nodo_interior': 3, 'n_atrs': 6, 'prop_umbral': 0.6}
+  Train  : 0.8795   Val: 0.8468
+----------------------------------------------------------------------
+  Params : {'n_arboles': 30, 'prop_muestras': 0.8, 'max_prof': 10, 'min_ejemplos_nodo_interior': 5, 'n_atrs': 12, 'prop_umbral': 0.5}
+  Train  : 0.8643   Val: 0.8555
+----------------------------------------------------------------------
+
+MEJOR COMBINACIÓN:
+  Params     : {'n_arboles': 15, 'max_prof': 15, 'min_ejemplos_nodo_interior': 3, 'n_atrs': 8, 'prop_umbral': 0.8}
+  Rendimiento validación: 0.8607
+
+======================================================================
+
+======================================================================
+DATASET: DIGITOS
+======================================================================
+
+COMBINACIONES PROBADAS:
+----------------------------------------------------------------------
+  Params : {'n_arboles': 10, 'max_prof': 10, 'min_ejemplos_nodo_interior': 3, 'n_atrs': 50, 'prop_umbral': 1.0}
+  Train  : 0.9630   Val: 0.8450
+----------------------------------------------------------------------
+  Params : {'n_arboles': 15, 'max_prof': 15, 'min_ejemplos_nodo_interior': 3, 'n_atrs': 100, 'prop_umbral': 0.8}
+  Train  : 0.9984   Val: 0.8870
+----------------------------------------------------------------------
+  Params : {'n_arboles': 20, 'max_prof': 20, 'min_ejemplos_nodo_interior': 3, 'n_atrs': 150, 'prop_umbral': 0.8}
+  Train  : 0.9994   Val: 0.9040
+----------------------------------------------------------------------
+  Params : {'n_arboles': 20, 'max_prof': 20, 'min_ejemplos_nodo_interior': 5, 'n_atrs': 200, 'prop_umbral': 0.7}
+  Train  : 0.9986   Val: 0.9100
+----------------------------------------------------------------------
+  Params : {'n_arboles': 30, 'max_prof': 25, 'min_ejemplos_nodo_interior': 3, 'n_atrs': 200, 'prop_umbral': 0.7}
+  Train  : 0.9994   Val: 0.9150
+----------------------------------------------------------------------
+  Params : {'n_arboles': 50, 'max_prof': 25, 'min_ejemplos_nodo_interior': 3, 'n_atrs': 28, 'prop_umbral': 0.3}
+  Train  : 0.9578   Val: 0.8530
+----------------------------------------------------------------------
+  Params : {'n_arboles': 50, 'max_prof': 30, 'min_ejemplos_nodo_interior': 2, 'n_atrs': 28, 'prop_umbral': 0.6}
+  Train  : 0.9752   Val: 0.8860
+----------------------------------------------------------------------
+  Params : {'n_arboles': 40, 'max_prof': 25, 'min_ejemplos_nodo_interior': 3, 'n_atrs': 50, 'prop_umbral': 0.3}
+  Train  : 0.9978   Val: 0.9100
+----------------------------------------------------------------------
+  Params : {'n_arboles': 40, 'max_prof': 25, 'min_ejemplos_nodo_interior': 3, 'n_atrs': 80, 'prop_umbral': 0.2}
+  Train  : 0.9982   Val: 0.9060
+----------------------------------------------------------------------
+
+MEJOR COMBINACIÓN:
+  Params     : {'n_arboles': 30, 'max_prof': 25, 'min_ejemplos_nodo_interior': 3, 'n_atrs': 200, 'prop_umbral': 0.7}
+  Rendimiento validación: 0.9150
+
+======================================================================
+
+======================================================================
+DATASET: IMDB
+======================================================================
+
+COMBINACIONES PROBADAS:
+----------------------------------------------------------------------
+  Params : {'n_arboles': 10, 'max_prof': 10, 'min_ejemplos_nodo_interior': 3, 'n_atrs': 100, 'prop_umbral': 1.0}
+  Train  : 0.8181   Val: 0.6525
+----------------------------------------------------------------------
+  Params : {'n_arboles': 15, 'max_prof': 15, 'min_ejemplos_nodo_interior': 3, 'n_atrs': 150, 'prop_umbral': 0.8}
+  Train  : 0.9050   Val: 0.7275
+----------------------------------------------------------------------
+  Params : {'n_arboles': 20, 'max_prof': 15, 'min_ejemplos_nodo_interior': 3, 'n_atrs': 200, 'prop_umbral': 0.8}
+  Train  : 0.9062   Val: 0.7350
+----------------------------------------------------------------------
+  Params : {'n_arboles': 20, 'max_prof': 20, 'min_ejemplos_nodo_interior': 5, 'n_atrs': 200, 'prop_umbral': 0.7}
+  Train  : 0.9419   Val: 0.7400
+----------------------------------------------------------------------
+  Params : {'n_arboles': 30, 'max_prof': 20, 'min_ejemplos_nodo_interior': 3, 'n_atrs': 300, 'prop_umbral': 0.7}
+  Train  : 0.9494   Val: 0.7600
+----------------------------------------------------------------------
+  Params : {'n_arboles': 50, 'max_prof': 15, 'min_ejemplos_nodo_interior': 3, 'n_atrs': 24, 'prop_umbral': 0.5}
+  Train  : 0.7963   Val: 0.6700
+----------------------------------------------------------------------
+  Params : {'n_arboles': 40, 'max_prof': 20, 'min_ejemplos_nodo_interior': 3, 'n_atrs': 80, 'prop_umbral': 0.4}
+  Train  : 0.9731   Val: 0.7475
+----------------------------------------------------------------------
+  Params : {'n_arboles': 60, 'max_prof': 10, 'min_ejemplos_nodo_interior': 5, 'n_atrs': 50, 'prop_umbral': 0.5}
+  Train  : 0.8050   Val: 0.6700
+----------------------------------------------------------------------
+
+MEJOR COMBINACIÓN:
+  Params     : {'n_arboles': 30, 'max_prof': 20, 'min_ejemplos_nodo_interior': 3, 'n_atrs': 300, 'prop_umbral': 0.7}
+  Rendimiento validación: 0.7600
+
+======================================================================
+
+======================================================================
+DATASET: CREDITO
+======================================================================
+
+COMBINACIONES PROBADAS:
+----------------------------------------------------------------------
+  Params : {'n_arboles': 10, 'max_prof': 5, 'min_ejemplos_nodo_interior': 3, 'n_atrs': 3, 'prop_umbral': 1.0}
+  Train  : 0.8410   Val: 0.7231
+----------------------------------------------------------------------
+  Params : {'n_arboles': 10, 'max_prof': 10, 'min_ejemplos_nodo_interior': 3, 'n_atrs': 3, 'prop_umbral': 1.0}
+  Train  : 0.6923   Val: 0.6231
+----------------------------------------------------------------------
+  Params : {'n_arboles': 15, 'max_prof': 10, 'min_ejemplos_nodo_interior': 5, 'n_atrs': 4, 'prop_umbral': 0.8}
+  Train  : 0.9333   Val: 0.9077
+----------------------------------------------------------------------
+  Params : {'n_arboles': 20, 'max_prof': 15, 'min_ejemplos_nodo_interior': 3, 'n_atrs': 4, 'prop_umbral': 0.8}
+  Train  : 0.9462   Val: 0.9154
+----------------------------------------------------------------------
+  Params : {'n_arboles': 20, 'max_prof': 15, 'min_ejemplos_nodo_interior': 3, 'n_atrs': 6, 'prop_umbral': 0.7}
+  Train  : 0.9872   Val: 0.9231
+----------------------------------------------------------------------
+  Params : {'n_arboles': 50, 'max_prof': 10, 'min_ejemplos_nodo_interior': 3, 'n_atrs': 6, 'prop_umbral': 1.0}
+  Train  : 0.9872   Val: 0.9385
+----------------------------------------------------------------------
+  Params : {'n_arboles': 40, 'max_prof': 12, 'min_ejemplos_nodo_interior': 2, 'n_atrs': 3, 'prop_umbral': 1.0}
+  Train  : 0.8282   Val: 0.7923
+----------------------------------------------------------------------
+  Params : {'n_arboles': 30, 'max_prof': 20, 'min_ejemplos_nodo_interior': 2, 'n_atrs': 3, 'prop_umbral': 1.0}
+  Train  : 0.8974   Val: 0.8231
+----------------------------------------------------------------------
+
+MEJOR COMBINACIÓN:
+  Params     : {'n_arboles': 50, 'max_prof': 10, 'min_ejemplos_nodo_interior': 3, 'n_atrs': 6, 'prop_umbral': 1.0}
+  Rendimiento validación: 0.9385
+
+======================================================================
+
+======================================================================
+DATASET: ADULT
+======================================================================
+
+COMBINACIONES PROBADAS:
+----------------------------------------------------------------------
+  Params : {'n_arboles': 10, 'max_prof': 5, 'min_ejemplos_nodo_interior': 5, 'n_atrs': 4, 'prop_umbral': 1.0}
+  Train  : 0.7796   Val: 0.7774
+----------------------------------------------------------------------
+  Params : {'n_arboles': 10, 'max_prof': 10, 'min_ejemplos_nodo_interior': 5, 'n_atrs': 6, 'prop_umbral': 1.0}
+  Train  : 0.8397   Val: 0.8372
+----------------------------------------------------------------------
+  Params : {'n_arboles': 15, 'max_prof': 10, 'min_ejemplos_nodo_interior': 3, 'n_atrs': 6, 'prop_umbral': 0.8}
+  Train  : 0.8574   Val: 0.8561
+----------------------------------------------------------------------
+  Params : {'n_arboles': 15, 'max_prof': 15, 'min_ejemplos_nodo_interior': 3, 'n_atrs': 8, 'prop_umbral': 0.8}
+  Train  : 0.8928   Val: 0.8669
+----------------------------------------------------------------------
+  Params : {'n_arboles': 20, 'max_prof': 15, 'min_ejemplos_nodo_interior': 3, 'n_atrs': 8, 'prop_umbral': 0.7}
+  Train  : 0.8876   Val: 0.8685
+----------------------------------------------------------------------
+  Params : {'n_arboles': 50, 'max_prof': 15, 'min_ejemplos_nodo_interior': 5, 'n_atrs': 3, 'prop_umbral': 0.7}
+  Train  : 0.7961   Val: 0.7929
+----------------------------------------------------------------------
+  Params : {'n_arboles': 40, 'prop_muestras': 0.7, 'max_prof': 20, 'min_ejemplos_nodo_interior': 3, 'n_atrs': 6, 'prop_umbral': 0.6}
+  Train  : 0.8822   Val: 0.8577
+----------------------------------------------------------------------
+  Params : {'n_arboles': 30, 'prop_muestras': 0.8, 'max_prof': 10, 'min_ejemplos_nodo_interior': 5, 'n_atrs': 12, 'prop_umbral': 0.5}
+  Train  : 0.8657   Val: 0.8625
+----------------------------------------------------------------------
+
+MEJOR COMBINACIÓN:
+  Params     : {'n_arboles': 20, 'max_prof': 15, 'min_ejemplos_nodo_interior': 3, 'n_atrs': 8, 'prop_umbral': 0.7}
+  Rendimiento validación: 0.8685
+
+======================================================================
+
+======================================================================
+DATASET: DIGITOS
+======================================================================
+
+COMBINACIONES PROBADAS:
+----------------------------------------------------------------------
+  Params : {'n_arboles': 10, 'max_prof': 10, 'min_ejemplos_nodo_interior': 3, 'n_atrs': 50, 'prop_umbral': 1.0}
+  Train  : 0.9550   Val: 0.8420
+----------------------------------------------------------------------
+  Params : {'n_arboles': 15, 'max_prof': 15, 'min_ejemplos_nodo_interior': 3, 'n_atrs': 100, 'prop_umbral': 0.8}
+  Train  : 0.9982   Val: 0.8970
+----------------------------------------------------------------------
+  Params : {'n_arboles': 20, 'max_prof': 20, 'min_ejemplos_nodo_interior': 3, 'n_atrs': 150, 'prop_umbral': 0.8}
+  Train  : 0.9996   Val: 0.9120
+----------------------------------------------------------------------
+  Params : {'n_arboles': 20, 'max_prof': 20, 'min_ejemplos_nodo_interior': 5, 'n_atrs': 200, 'prop_umbral': 0.7}
+  Train  : 0.9986   Val: 0.9060
+----------------------------------------------------------------------
+  Params : {'n_arboles': 30, 'max_prof': 25, 'min_ejemplos_nodo_interior': 3, 'n_atrs': 200, 'prop_umbral': 0.7}
+  Train  : 0.9994   Val: 0.9150
+----------------------------------------------------------------------
+  Params : {'n_arboles': 50, 'max_prof': 25, 'min_ejemplos_nodo_interior': 3, 'n_atrs': 28, 'prop_umbral': 0.3}
+  Train  : 0.9618   Val: 0.8750
+----------------------------------------------------------------------
+  Params : {'n_arboles': 50, 'max_prof': 30, 'min_ejemplos_nodo_interior': 2, 'n_atrs': 28, 'prop_umbral': 0.6}
+  Train  : 0.9730   Val: 0.8580
+----------------------------------------------------------------------
+  Params : {'n_arboles': 40, 'max_prof': 25, 'min_ejemplos_nodo_interior': 3, 'n_atrs': 50, 'prop_umbral': 0.3}
+  Train  : 0.9946   Val: 0.9030
+----------------------------------------------------------------------
+  Params : {'n_arboles': 40, 'max_prof': 25, 'min_ejemplos_nodo_interior': 3, 'n_atrs': 80, 'prop_umbral': 0.2}
+  Train  : 0.9984   Val: 0.9250
+----------------------------------------------------------------------
+
+MEJOR COMBINACIÓN:
+  Params     : {'n_arboles': 40, 'max_prof': 25, 'min_ejemplos_nodo_interior': 3, 'n_atrs': 80, 'prop_umbral': 0.2}
+  Rendimiento validación: 0.9250
+
+======================================================================
+
+======================================================================
+DATASET: IMDB
+======================================================================
+
+COMBINACIONES PROBADAS:
+----------------------------------------------------------------------
+  Params : {'n_arboles': 10, 'max_prof': 10, 'min_ejemplos_nodo_interior': 3, 'n_atrs': 100, 'prop_umbral': 1.0}
+  Train  : 0.8106   Val: 0.7225
+----------------------------------------------------------------------
+  Params : {'n_arboles': 15, 'max_prof': 15, 'min_ejemplos_nodo_interior': 3, 'n_atrs': 150, 'prop_umbral': 0.8}
+  Train  : 0.8612   Val: 0.7175
+----------------------------------------------------------------------
+  Params : {'n_arboles': 20, 'max_prof': 15, 'min_ejemplos_nodo_interior': 3, 'n_atrs': 200, 'prop_umbral': 0.8}
+  Train  : 0.8962   Val: 0.7575
+----------------------------------------------------------------------
+  Params : {'n_arboles': 20, 'max_prof': 20, 'min_ejemplos_nodo_interior': 5, 'n_atrs': 200, 'prop_umbral': 0.7}
+  Train  : 0.9519   Val: 0.7550
+----------------------------------------------------------------------
+  Params : {'n_arboles': 30, 'max_prof': 20, 'min_ejemplos_nodo_interior': 3, 'n_atrs': 300, 'prop_umbral': 0.7}
+  Train  : 0.9481   Val: 0.7800
+----------------------------------------------------------------------
+  Params : {'n_arboles': 50, 'max_prof': 15, 'min_ejemplos_nodo_interior': 3, 'n_atrs': 24, 'prop_umbral': 0.5}
+  Train  : 0.7644   Val: 0.5925
+----------------------------------------------------------------------
+  Params : {'n_arboles': 40, 'max_prof': 20, 'min_ejemplos_nodo_interior': 3, 'n_atrs': 80, 'prop_umbral': 0.4}
+  Train  : 0.9431   Val: 0.7275
+----------------------------------------------------------------------
+  Params : {'n_arboles': 60, 'max_prof': 10, 'min_ejemplos_nodo_interior': 5, 'n_atrs': 50, 'prop_umbral': 0.5}
+  Train  : 0.7662   Val: 0.6625
+----------------------------------------------------------------------
+
+MEJOR COMBINACIÓN:
+  Params     : {'n_arboles': 30, 'max_prof': 20, 'min_ejemplos_nodo_interior': 3, 'n_atrs': 300, 'prop_umbral': 0.7}
+  Rendimiento validación: 0.7800
+
+======================================================================
+
+======================================================================
+DATASET: CREDITO
+======================================================================
+
+COMBINACIONES PROBADAS:
+----------------------------------------------------------------------
+  Params : {'n_arboles': 10, 'max_prof': 5, 'min_ejemplos_nodo_interior': 3, 'n_atrs': 3, 'prop_umbral': 1.0}
+  Train  : 0.6795   Val: 0.5923
+----------------------------------------------------------------------
+  Params : {'n_arboles': 10, 'max_prof': 10, 'min_ejemplos_nodo_interior': 3, 'n_atrs': 3, 'prop_umbral': 1.0}
+  Train  : 0.6744   Val: 0.5846
+----------------------------------------------------------------------
+  Params : {'n_arboles': 15, 'max_prof': 10, 'min_ejemplos_nodo_interior': 5, 'n_atrs': 4, 'prop_umbral': 0.8}
+  Train  : 0.9256   Val: 0.8923
+----------------------------------------------------------------------
+  Params : {'n_arboles': 20, 'max_prof': 15, 'min_ejemplos_nodo_interior': 3, 'n_atrs': 4, 'prop_umbral': 0.8}
+  Train  : 0.9359   Val: 0.9615
+----------------------------------------------------------------------
+  Params : {'n_arboles': 20, 'max_prof': 15, 'min_ejemplos_nodo_interior': 3, 'n_atrs': 6, 'prop_umbral': 0.7}
+  Train  : 0.9821   Val: 0.9308
+----------------------------------------------------------------------
+  Params : {'n_arboles': 50, 'max_prof': 10, 'min_ejemplos_nodo_interior': 3, 'n_atrs': 6, 'prop_umbral': 1.0}
+  Train  : 0.9795   Val: 0.9385
+----------------------------------------------------------------------
+  Params : {'n_arboles': 40, 'max_prof': 12, 'min_ejemplos_nodo_interior': 2, 'n_atrs': 3, 'prop_umbral': 1.0}
+  Train  : 0.8179   Val: 0.7462
+----------------------------------------------------------------------
+  Params : {'n_arboles': 30, 'max_prof': 20, 'min_ejemplos_nodo_interior': 2, 'n_atrs': 3, 'prop_umbral': 1.0}
+  Train  : 0.8179   Val: 0.7923
+----------------------------------------------------------------------
+
+MEJOR COMBINACIÓN:
+  Params     : {'n_arboles': 20, 'max_prof': 15, 'min_ejemplos_nodo_interior': 3, 'n_atrs': 4, 'prop_umbral': 0.8}
+  Rendimiento validación: 0.9615
+
+======================================================================
+
+======================================================================
+DATASET: ADULT
+======================================================================
+
+COMBINACIONES PROBADAS:
+----------------------------------------------------------------------
+  Params : {'n_arboles': 10, 'max_prof': 5, 'min_ejemplos_nodo_interior': 5, 'n_atrs': 4, 'prop_umbral': 1.0}
+  Train  : 0.7883   Val: 0.7816
+----------------------------------------------------------------------
+  Params : {'n_arboles': 10, 'max_prof': 10, 'min_ejemplos_nodo_interior': 5, 'n_atrs': 6, 'prop_umbral': 1.0}
+  Train  : 0.8470   Val: 0.8402
+----------------------------------------------------------------------
+  Params : {'n_arboles': 15, 'max_prof': 10, 'min_ejemplos_nodo_interior': 3, 'n_atrs': 6, 'prop_umbral': 0.8}
+  Train  : 0.8626   Val: 0.8507
+----------------------------------------------------------------------
+  Params : {'n_arboles': 15, 'max_prof': 15, 'min_ejemplos_nodo_interior': 3, 'n_atrs': 8, 'prop_umbral': 0.8}
+  Train  : 0.8907   Val: 0.8601
+----------------------------------------------------------------------
+  Params : {'n_arboles': 20, 'max_prof': 15, 'min_ejemplos_nodo_interior': 3, 'n_atrs': 8, 'prop_umbral': 0.7}
+  Train  : 0.8933   Val: 0.8605
+----------------------------------------------------------------------
+  Params : {'n_arboles': 50, 'max_prof': 15, 'min_ejemplos_nodo_interior': 5, 'n_atrs': 3, 'prop_umbral': 0.7}
+  Train  : 0.7900   Val: 0.7870
+----------------------------------------------------------------------
+  Params : {'n_arboles': 40, 'prop_muestras': 0.7, 'max_prof': 20, 'min_ejemplos_nodo_interior': 3, 'n_atrs': 6, 'prop_umbral': 0.6}
+  Train  : 0.8781   Val: 0.8569
+----------------------------------------------------------------------
+  Params : {'n_arboles': 30, 'prop_muestras': 0.8, 'max_prof': 10, 'min_ejemplos_nodo_interior': 5, 'n_atrs': 12, 'prop_umbral': 0.5}
+  Train  : 0.8638   Val: 0.8543
+----------------------------------------------------------------------
+
+MEJOR COMBINACIÓN:
+  Params     : {'n_arboles': 20, 'max_prof': 15, 'min_ejemplos_nodo_interior': 3, 'n_atrs': 8, 'prop_umbral': 0.7}
+  Rendimiento validación: 0.8605
+
+======================================================================
+
+======================================================================
+DATASET: DIGITOS
+======================================================================
+
+COMBINACIONES PROBADAS:
+----------------------------------------------------------------------
+  Params : {'n_arboles': 10, 'max_prof': 10, 'min_ejemplos_nodo_interior': 3, 'n_atrs': 50, 'prop_umbral': 1.0}
+  Train  : 0.9598   Val: 0.8520
+----------------------------------------------------------------------
+  Params : {'n_arboles': 15, 'max_prof': 15, 'min_ejemplos_nodo_interior': 3, 'n_atrs': 100, 'prop_umbral': 0.8}
+  Train  : 0.9968   Val: 0.8980
+----------------------------------------------------------------------
+  Params : {'n_arboles': 20, 'max_prof': 20, 'min_ejemplos_nodo_interior': 3, 'n_atrs': 150, 'prop_umbral': 0.8}
+  Train  : 0.9988   Val: 0.9080
+----------------------------------------------------------------------
+  Params : {'n_arboles': 20, 'max_prof': 20, 'min_ejemplos_nodo_interior': 5, 'n_atrs': 200, 'prop_umbral': 0.7}
+  Train  : 0.9982   Val: 0.9110
+----------------------------------------------------------------------
+  Params : {'n_arboles': 30, 'max_prof': 25, 'min_ejemplos_nodo_interior': 3, 'n_atrs': 200, 'prop_umbral': 0.7}
+  Train  : 0.9992   Val: 0.9070
+----------------------------------------------------------------------
+  Params : {'n_arboles': 50, 'max_prof': 25, 'min_ejemplos_nodo_interior': 3, 'n_atrs': 28, 'prop_umbral': 0.3}
+  Train  : 0.9706   Val: 0.8770
+----------------------------------------------------------------------
+  Params : {'n_arboles': 50, 'max_prof': 30, 'min_ejemplos_nodo_interior': 2, 'n_atrs': 28, 'prop_umbral': 0.6}
+  Train  : 0.9668   Val: 0.8690
+----------------------------------------------------------------------
+  Params : {'n_arboles': 40, 'max_prof': 25, 'min_ejemplos_nodo_interior': 3, 'n_atrs': 50, 'prop_umbral': 0.3}
+  Train  : 0.9958   Val: 0.9110
+----------------------------------------------------------------------
+  Params : {'n_arboles': 40, 'max_prof': 25, 'min_ejemplos_nodo_interior': 3, 'n_atrs': 80, 'prop_umbral': 0.2}
+  Train  : 0.9986   Val: 0.9110
+----------------------------------------------------------------------
+
+MEJOR COMBINACIÓN:
+  Params     : {'n_arboles': 20, 'max_prof': 20, 'min_ejemplos_nodo_interior': 5, 'n_atrs': 200, 'prop_umbral': 0.7}
+  Rendimiento validación: 0.9110
+
+======================================================================
+
+======================================================================
+DATASET: IMDB
+======================================================================
+
+COMBINACIONES PROBADAS:
+----------------------------------------------------------------------
+  Params : {'n_arboles': 10, 'max_prof': 10, 'min_ejemplos_nodo_interior': 3, 'n_atrs': 100, 'prop_umbral': 1.0}
+  Train  : 0.8181   Val: 0.6875
+----------------------------------------------------------------------
+  Params : {'n_arboles': 15, 'max_prof': 15, 'min_ejemplos_nodo_interior': 3, 'n_atrs': 150, 'prop_umbral': 0.8}
+  Train  : 0.9113   Val: 0.7550
+----------------------------------------------------------------------
+  Params : {'n_arboles': 20, 'max_prof': 15, 'min_ejemplos_nodo_interior': 3, 'n_atrs': 200, 'prop_umbral': 0.8}
+  Train  : 0.9106   Val: 0.7700
+----------------------------------------------------------------------
+  Params : {'n_arboles': 20, 'max_prof': 20, 'min_ejemplos_nodo_interior': 5, 'n_atrs': 200, 'prop_umbral': 0.7}
+  Train  : 0.9425   Val: 0.7650
+----------------------------------------------------------------------
+  Params : {'n_arboles': 30, 'max_prof': 20, 'min_ejemplos_nodo_interior': 3, 'n_atrs': 300, 'prop_umbral': 0.7}
+  Train  : 0.9494   Val: 0.7700
+----------------------------------------------------------------------
+  Params : {'n_arboles': 50, 'max_prof': 15, 'min_ejemplos_nodo_interior': 3, 'n_atrs': 24, 'prop_umbral': 0.5}
+  Train  : 0.7844   Val: 0.6400
+----------------------------------------------------------------------
+  Params : {'n_arboles': 40, 'max_prof': 20, 'min_ejemplos_nodo_interior': 3, 'n_atrs': 80, 'prop_umbral': 0.4}
+  Train  : 0.9363   Val: 0.7600
+----------------------------------------------------------------------
+  Params : {'n_arboles': 60, 'max_prof': 10, 'min_ejemplos_nodo_interior': 5, 'n_atrs': 50, 'prop_umbral': 0.5}
+  Train  : 0.8000   Val: 0.7025
+----------------------------------------------------------------------
+
+MEJOR COMBINACIÓN:
+  Params     : {'n_arboles': 20, 'max_prof': 15, 'min_ejemplos_nodo_interior': 3, 'n_atrs': 200, 'prop_umbral': 0.8}
+  Rendimiento validación: 0.7700
+
+======================================================================
+

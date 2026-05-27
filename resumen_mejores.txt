@@ -1,0 +1,60 @@
+DATASET: SIN_DATASET
+  Mejor 1:
+    Params: {'n_arboles': 15, 'max_prof': 10, 'min_ejemplos_nodo_interior': 5, 'n_atrs': 4, 'prop_umbral': 0.8}
+    Rendimiento validacion: 0.9077
+
+DATASET: CREDITO
+  Mejor 1:
+    Params: {'n_arboles': 20, 'max_prof': 15, 'min_ejemplos_nodo_interior': 3, 'n_atrs': 6, 'prop_umbral': 0.7}
+    Rendimiento validacion: 0.8615
+  Mejor 2:
+    Params: {'n_arboles': 50, 'max_prof': 10, 'min_ejemplos_nodo_interior': 3, 'n_atrs': 6, 'prop_umbral': 1.0}
+    Rendimiento validacion: 0.8615
+  Mejor 3:
+    Params: {'n_arboles': 50, 'max_prof': 10, 'min_ejemplos_nodo_interior': 3, 'n_atrs': 6, 'prop_umbral': 1.0}
+    Rendimiento validacion: 0.9385
+  Mejor 4:
+    Params: {'n_arboles': 20, 'max_prof': 15, 'min_ejemplos_nodo_interior': 3, 'n_atrs': 4, 'prop_umbral': 0.8}
+    Rendimiento validacion: 0.9615
+
+DATASET: ADULT
+  Mejor 1:
+    Params: {'n_arboles': 15, 'max_prof': 15, 'min_ejemplos_nodo_interior': 3, 'n_atrs': 8, 'prop_umbral': 0.8}
+    Rendimiento validacion: 0.8665
+  Mejor 2:
+    Params: {'n_arboles': 15, 'max_prof': 15, 'min_ejemplos_nodo_interior': 3, 'n_atrs': 8, 'prop_umbral': 0.8}
+    Rendimiento validacion: 0.8607
+  Mejor 3:
+    Params: {'n_arboles': 20, 'max_prof': 15, 'min_ejemplos_nodo_interior': 3, 'n_atrs': 8, 'prop_umbral': 0.7}
+    Rendimiento validacion: 0.8685
+  Mejor 4:
+    Params: {'n_arboles': 20, 'max_prof': 15, 'min_ejemplos_nodo_interior': 3, 'n_atrs': 8, 'prop_umbral': 0.7}
+    Rendimiento validacion: 0.8605
+
+DATASET: DIGITOS
+  Mejor 1:
+    Params: {'n_arboles': 30, 'max_prof': 25, 'min_ejemplos_nodo_interior': 3, 'n_atrs': 200, 'prop_umbral': 0.7}
+    Rendimiento validacion: 0.9240
+  Mejor 2:
+    Params: {'n_arboles': 30, 'max_prof': 25, 'min_ejemplos_nodo_interior': 3, 'n_atrs': 200, 'prop_umbral': 0.7}
+    Rendimiento validacion: 0.9150
+  Mejor 3:
+    Params: {'n_arboles': 40, 'max_prof': 25, 'min_ejemplos_nodo_interior': 3, 'n_atrs': 80, 'prop_umbral': 0.2}
+    Rendimiento validacion: 0.9250
+  Mejor 4:
+    Params: {'n_arboles': 20, 'max_prof': 20, 'min_ejemplos_nodo_interior': 5, 'n_atrs': 200, 'prop_umbral': 0.7}
+    Rendimiento validacion: 0.9110
+
+DATASET: IMDB
+  Mejor 1:
+    Params: {'n_arboles': 20, 'max_prof': 20, 'min_ejemplos_nodo_interior': 5, 'n_atrs': 200, 'prop_umbral': 0.7}
+    Rendimiento validacion: 0.7875
+  Mejor 2:
+    Params: {'n_arboles': 30, 'max_prof': 20, 'min_ejemplos_nodo_interior': 3, 'n_atrs': 300, 'prop_umbral': 0.7}
+    Rendimiento validacion: 0.7600
+  Mejor 3:
+    Params: {'n_arboles': 30, 'max_prof': 20, 'min_ejemplos_nodo_interior': 3, 'n_atrs': 300, 'prop_umbral': 0.7}
+    Rendimiento validacion: 0.7800
+  Mejor 4:
+    Params: {'n_arboles': 20, 'max_prof': 15, 'min_ejemplos_nodo_interior': 3, 'n_atrs': 200, 'prop_umbral': 0.8}
+    Rendimiento validacion: 0.7700
