@@ -10,15 +10,17 @@
 
 
 # --------------------------------------------------------------------------
-# Autor(a) del trabajo:
+# Primer componente del trabajo:
 #
-# APELLIDOS:
-# NOMBRE: 
+# APELLIDOS: López Bártulos
+# NOMBRE: Ricardo
+# DNI: 20098557F
 #
 # Segundo(a) componente (si se trata de un grupo):
 #
-# APELLIDOS:
-# NOMBRE:
+# APELLIDOS: López Márquez
+# NOMBRE: Paula
+# DNI: 54179941Z
 # ----------------------------------------------------------------------------
 
 
@@ -201,7 +203,6 @@ def particion_entr_prueba(X, y, test=0.20):
 
 # En votos:
 
-Xe_votos,Xp_votos,ye_votos,yp_votos=particion_entr_prueba(X_votos,y_votos,test=1/3)
 #  >>>Xe_votos,Xp_votos,ye_votos,yp_votos=particion_entr_prueba(X_votos,y_votos,test=1/3)
 
 # Como se observa, se han separado 2/3 para entrenamiento y 1/3 para prueba:
@@ -224,8 +225,7 @@ Xe_votos,Xp_votos,ye_votos,yp_votos=particion_entr_prueba(X_votos,y_votos,test=1
 
 
 # Otro ejemplo con los datos del cáncer, en el que se observa que las proporciones
-# entre clases se conservan en la partición. 
-Xev_cancer,Xp_cancer,yev_cancer,yp_cancer=particion_entr_prueba(X_cancer,y_cancer,test=0.2)    
+# entre clases se conservan en la partición.  
 # >>> Xev_cancer,Xp_cancer,yev_cancer,yp_cancer=particion_entr_prueba(X_cancer,y_cancer,test=0.2)
 
 # >>> np.unique(y_cancer,return_counts=True)
@@ -489,6 +489,7 @@ class ArbolDecision:
         proporciones = conteos / n
         proporciones = proporciones[proporciones > 0] #Para evitar hacer logaritmo de cero
         return -np.sum(proporciones * np.log2(proporciones))
+        #H(y) = - Σ p(c) · log₂(p(c))
 
     def _ganancia_informacion(self, y, y_izq, y_der):
         """Calcula la ganancia de información de una partición."""
@@ -630,23 +631,28 @@ class ArbolDecision:
             raise ClasificadorNoEntrenado("El clasificador no ha sido entrenado.")
         return self._clasifica_prob_ejemplo(x, self.raiz)
 
-    def _imprime_nodo(self, nodo, nombre_atrs, nombre_clase, prefijo, es_izq):
+    def _imprime_nodo(self, nodo, nombre_atrs, nombre_clase, prefijo):
         """Función auxiliar recursiva para imprimir el árbol."""
         if nodo.es_hoja():
-            print(f"{prefijo}{nombre_clase}: {nodo.clase} -- {nodo.distr}")
+            # Convertimos a tipos nativos de Python para que la salida quede como en los ejemplos
+            clase_str = str(nodo.clase) 
+            distr_str = {(int(k) if str(k).lstrip('-').isdigit() else str(k)): int(v) 
+             for k, v in nodo.distr.items()} #Las clases numéricas se mantienen como valores numéricos
+            print(f"{prefijo}{nombre_clase}: {clase_str} -- {distr_str}")
         else:
+            umbral = float(nodo.umbral) # Convertimos a tipo nativo de Python para que la salida quede como en los ejemplos
             nombre_atr = nombre_atrs[nodo.atributo]
-            print(f"{prefijo}{nombre_atr} <= {nodo.umbral:.3f}")
+            print(f"{prefijo}{nombre_atr} <= {umbral:.3f}")
             nuevo_prefijo = prefijo + "     "
-            self._imprime_nodo(nodo.izq, nombre_atrs, nombre_clase, nuevo_prefijo, True)
-            print(f"{prefijo}{nombre_atr} > {nodo.umbral:.3f}")
-            self._imprime_nodo(nodo.der, nombre_atrs, nombre_clase, nuevo_prefijo, False)
+            self._imprime_nodo(nodo.izq, nombre_atrs, nombre_clase, nuevo_prefijo)
+            print(f"{prefijo}{nombre_atr} > {umbral:.3f}")
+            self._imprime_nodo(nodo.der, nombre_atrs, nombre_clase, nuevo_prefijo)
 
     def imprime_arbol(self, nombre_atrs, nombre_clase):
         """Imprime el árbol de decisión aprendido."""
         if self.raiz is None:
             raise ClasificadorNoEntrenado("El clasificador no ha sido entrenado.")
-        self._imprime_nodo(self.raiz, nombre_atrs, nombre_clase, "", True)
+        self._imprime_nodo(self.raiz, nombre_atrs, nombre_clase, "")
 
 
 # Algunos ejemplos (los resultados pueden variar, debido a la aleatoriedad)
@@ -1090,14 +1096,15 @@ import pandas as pd
 enc = OrdinalEncoder()
 X_credito_codificado = enc.fit_transform(X_credito)
 
-# * X_train_credito, y_train_credito, X_test_credito, y_test_credito
+# * X_train_credito, X_test_credito ,y_train_credito, y_test_credito
 #   conteniendo el dataset de crédito con los atributos numericos:
-X_train_temp_credito, X_test_credito, y_train_temp_credito, y_test_credito = particion_entr_prueba(X_credito_codificado, y_credito, test=0.20)
+# 'ev' : entrenamiento + validacion
+X_ev_credito, X_test_credito, y_ev_credito, y_test_credito = particion_entr_prueba(X_credito_codificado, y_credito, test=0.20)
 
 #Vamos a extraer un 20% para validación ya que es un dataset pequeño (60% train, 20% test, 20% validacion)
 #Valor de test = 0.2/0.8 = 0.25
 X_train_credito, X_valid_credito, y_train_credito, y_valid_credito = particion_entr_prueba(
-    X_train_temp_credito, y_train_temp_credito, test=0.25)
+    X_ev_credito, y_ev_credito, test=0.25)
 
 # ADULT
 df_adult = pd.read_csv('datos/adultDataset.csv')
@@ -1111,13 +1118,13 @@ X_adult = np.concatenate((X_adult_base[:, :4], X_adult_categorias), axis=1).asty
 
 # * X_train_adult, y_train_adult, X_test_adult, y_test_adult
 #   conteniendo el AdultDataset con los atributos numéricos:
-X_train_adult, X_test_adult, y_train_adult, y_test_adult = particion_entr_prueba(
+X_ev_adult, X_test_adult, y_ev_adult, y_test_adult = particion_entr_prueba(
     X_adult, y_adult, test=0.15)
 
 #Vamos a extraer un 15% para validación ya que es un dataset pequeño (70% train, 15% test, 15% validacion)
 #Valor de test = 0.15/0.85 = 0.18
 X_train_adult, X_valid_adult, y_train_adult, y_valid_adult = particion_entr_prueba(
-    X_train_adult, y_train_adult, test=0.18)
+    X_ev_adult, y_ev_adult, test=0.18)
 
 # DÍGITOS
 def carga_digitos(fichero_imagenes, fichero_etiquetas):
@@ -1199,8 +1206,8 @@ X_test_dg, y_test_dg = carga_digitos("datos/digitdata/testimages", "datos/digitd
 # DEJAR ESTE APARTADO COMENTADO, para que no se ejecuten las pruebas realizadas cuando se cargue
 # el archivo. 
 
-# Primero vamos a crear una funcion simple que dados datos de entrenamiento y validacion y una rejilla que contenga
-# combinaciones de hiperparametros seleccionadas manualmente para el Random Forest.
+# Primero vamos a crear una funcion que dados datos de entrenamiento y validacion y una rejilla que contenga
+# combinaciones de hiperparametros seleccionadas manualmente para el Random Forest. 
 # def busqueda_hiperparametros(X_train, y_train, X_val, y_val, rejilla, nombre_dataset ="", fichero_log = "resultados_hiperparametros_log"):
 #     """
 #     Prueba cada combinación de hiperparametros de la rejilla,
@@ -1208,7 +1215,7 @@ X_test_dg, y_test_dg = carga_digitos("datos/digitdata/testimages", "datos/digitd
 #     Escribe los resultados en fichero_log.
 #     Devuelve la mejor combinación encontrada y su rendimiento.
 #     """
-#     mejor_rend  = -1
+#     mejor_rend  = -np.inf
 #     mejores_params = None
 #     resultados = []
 
@@ -1320,6 +1327,58 @@ X_test_dg, y_test_dg = carga_digitos("datos/digitdata/testimages", "datos/digitd
 # print("----------------")
 # mejores_params_imdb, _ = busqueda_hiperparametros(
 #     X_train_imdb, y_train_imdb, X_valid_imdb, y_valid_imdb, rejilla_imdb, "IMDB")
+
+# Este sería el resultado de una ejecución de completa de la función busqueda_hiperparametros para un dataset
+# por ejemplo CREDITO
+
+# ======================================================================
+# DATASET: CREDITO
+# ======================================================================
+
+# COMBINACIONES PROBADAS:
+# ----------------------------------------------------------------------
+#   Params : {'n_arboles': 10, 'max_prof': 5, 'min_ejemplos_nodo_interior': 3, 'n_atrs': 3, 'prop_umbral': 1.0}
+#   Train  : 0.8410   Val: 0.7231
+# ----------------------------------------------------------------------
+#   Params : {'n_arboles': 10, 'max_prof': 10, 'min_ejemplos_nodo_interior': 3, 'n_atrs': 3, 'prop_umbral': 1.0}
+#   Train  : 0.6923   Val: 0.6231
+# ----------------------------------------------------------------------
+#   Params : {'n_arboles': 15, 'max_prof': 10, 'min_ejemplos_nodo_interior': 5, 'n_atrs': 4, 'prop_umbral': 0.8}
+#   Train  : 0.9333   Val: 0.9077
+# ----------------------------------------------------------------------
+#   Params : {'n_arboles': 20, 'max_prof': 15, 'min_ejemplos_nodo_interior': 3, 'n_atrs': 4, 'prop_umbral': 0.8}
+#   Train  : 0.9462   Val: 0.9154
+# ----------------------------------------------------------------------
+#   Params : {'n_arboles': 20, 'max_prof': 15, 'min_ejemplos_nodo_interior': 3, 'n_atrs': 6, 'prop_umbral': 0.7}
+#   Train  : 0.9872   Val: 0.9231
+# ----------------------------------------------------------------------
+#   Params : {'n_arboles': 50, 'max_prof': 10, 'min_ejemplos_nodo_interior': 3, 'n_atrs': 6, 'prop_umbral': 1.0}
+#   Train  : 0.9872   Val: 0.9385
+# ----------------------------------------------------------------------
+#   Params : {'n_arboles': 40, 'max_prof': 12, 'min_ejemplos_nodo_interior': 2, 'n_atrs': 3, 'prop_umbral': 1.0}
+#   Train  : 0.8282   Val: 0.7923
+# ----------------------------------------------------------------------
+#   Params : {'n_arboles': 30, 'max_prof': 20, 'min_ejemplos_nodo_interior': 2, 'n_atrs': 3, 'prop_umbral': 1.0}
+#   Train  : 0.8974   Val: 0.8231
+# ----------------------------------------------------------------------
+
+# MEJOR COMBINACIÓN:
+#   Params     : {'n_arboles': 50, 'max_prof': 10, 'min_ejemplos_nodo_interior': 3, 'n_atrs': 6, 'prop_umbral': 1.0}
+#   Rendimiento validación: 0.9385
+
+# ======================================================================
+
+# Tras ejecutar multiples veces la funcion busqueda_hiperparametros para cada dataset, elegimos como mejor combinacion
+# de hiperparametros a la combinacion que más veces se repite como ganadora.
+# En caso de que haya dos combinaciones que ganan con una frecuencia similar, nos fijamos en el posible overfitting y si registran un rendimiento promedio
+# parecido en train y validacion, nos decantamos por la combinación que genera el modelo más simple, menos árboles y menos profundidad.
+
+# Ganadores en nuestro caso
+# mejores_params_imdb = {'n_arboles': 30, 'max_prof': 20, 'min_ejemplos_nodo_interior': 3, 'n_atrs': 300, 'prop_umbral': 0.7}
+# mejores_params_credito = {'n_arboles': 50, 'max_prof': 10, 'min_ejemplos_nodo_interior': 3, 'n_atrs': 6, 'prop_umbral': 1.0}
+# mejores_params_adult = {'n_arboles': 20, 'max_prof': 15, 'min_ejemplos_nodo_interior': 3, 'n_atrs': 8, 'prop_umbral': 0.7}
+# mejores_params_dg = {'n_arboles': 30, 'max_prof': 25, 'min_ejemplos_nodo_interior': 3, 'n_atrs': 200, 'prop_umbral': 0.7}
+
 # ----------------------------
 
 
@@ -1383,7 +1442,9 @@ print("**********************************\n")
 
 clf_titanic = ArbolDecision(max_prof=3,min_ejemplos_nodo_interior=5,n_atrs=3)
 clf_titanic.entrena(X_train_titanic, y_train_titanic)
-clf_titanic.imprime_arbol(["Pclass", "Mujer", "Edad"],"Partido")
+#clf_titanic.imprime_arbol(["Pclass", "Mujer", "Edad"],"Partido") # Viene como nombre de clase "Partido"
+#Cambio esa linea por una en la que el nombre sea "Sobrevive", más acorde
+clf_titanic.imprime_arbol(["Pclass", "Mujer", "Edad"],"Sobrevive")
 rend_train_titanic = rendimiento(clf_titanic,X_train_titanic,y_train_titanic)
 rend_test_titanic = rendimiento(clf_titanic,X_test_titanic,y_test_titanic)
 print(f"****** Rendimiento DT titanic train: {rend_train_titanic}")
@@ -1402,14 +1463,15 @@ print(f"****** Rendimiento DT votos en train: {rend_train_votos}")
 print(f"****** Rendimiento DT votos en test:  {rend_test_votos}\n\n\n\n")
 
 
-
-# clf_iris = ArbolDecision(max_prof=3,n_atrs=4)
-# clf_iris.entrena(X_train_iris, y_train_iris)
-# clf_iris.imprime_arbol(["Long. Sépalo", "Anch. Sépalo", "Long. Pétalo", "Anch. Pétalo"],"Clase")
-# rend_train_iris = rendimiento(clf_iris,X_train_iris,y_train_iris)
-# rend_test_iris = rendimiento(clf_iris,X_test_iris,y_test_iris)
-# print(f"********************* Rendimiento DT iris train: {rend_train_iris}")
-# print(f"********************* Rendimiento DT iris test: {rend_test_iris}\n\n\n\n ")
+# Hago la división de entrenamiento y prueba para iris ya que no viene hecha con carga_datos
+X_train_iris, X_test_iris, y_train_iris, y_test_iris = particion_entr_prueba(X_iris, y_iris, test=0.2)
+clf_iris = ArbolDecision(max_prof=3,n_atrs=4)
+clf_iris.entrena(X_train_iris, y_train_iris)
+clf_iris.imprime_arbol(["Long. Sépalo", "Anch. Sépalo", "Long. Pétalo", "Anch. Pétalo"],"Clase")
+rend_train_iris = rendimiento(clf_iris,X_train_iris,y_train_iris)
+rend_test_iris = rendimiento(clf_iris,X_test_iris,y_test_iris)
+print(f"********************* Rendimiento DT iris train: {rend_train_iris}")
+print(f"********************* Rendimiento DT iris test: {rend_test_iris}\n\n\n\n ")
 
 
 
